@@ -1,6 +1,6 @@
 # Postgresql (http://www.postgresql.org/)
 
-FROM ubuntu:14.04
+FROM ubuntu:13.04
 MAINTAINER Ryan Seto <ryanseto@yak.net>
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
