@@ -1,9 +1,9 @@
 # Postgresql (http://www.postgresql.org/)
 
-FROM ubuntu:13.04
+FROM ubuntu:12.04
 MAINTAINER Ryan Seto <ryanseto@yak.net>
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu raring main universe" > /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
 # Ensure UTF-8
 RUN apt-get update
@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y wget
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 # Install the latest postgresql
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ raring main" > /etc/apt/sources.list.d/pgdg.list && \
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise main" > /etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 && \
     /etc/init.d/postgresql stop
