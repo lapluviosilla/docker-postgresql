@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y wget
 RUN wget --quiet --no-check-certificate -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 # Install the latest postgresql
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise main" > /etc/apt/sources.list.d/pgdg.list && \
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes postgresql-9.2 postgresql-client-9.2 postgresql-contrib-9.2 && \
     /etc/init.d/postgresql stop
