@@ -1,6 +1,6 @@
 # Postgresql (http://www.postgresql.org/)
 
-FROM phusion/baseimage
+FROM ubuntu:14.04
 MAINTAINER Ryan Seto <ryanseto@yak.net>
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
