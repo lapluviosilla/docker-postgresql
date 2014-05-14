@@ -18,7 +18,7 @@ RUN wget --quiet --no-check-certificate -O - https://www.postgresql.org/media/ke
 # Install the latest postgresql
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise main" > /etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes postgresql-9.2 postgresql-client-9.2 postgresql-contrib-9.2 && \
     /etc/init.d/postgresql stop
 
 # Install other tools.
@@ -30,16 +30,16 @@ RUN mkdir /etc/ssl/private-copy; mv /etc/ssl/private/* /etc/ssl/private-copy/; r
 VOLUME ["/data", "/var/log/postgresql"]
 
 RUN echo "Dropping current cluster" && \
-    pg_dropcluster --stop 9.3 main
+    pg_dropcluster --stop 9.2 main
 
 RUN echo "Creating new cluster with UTF8 encoding" && \
-    pg_createcluster --locale=en_US.UTF8 --start 9.3 main
+    pg_createcluster --locale=en_US.UTF8 --start 9.2 main
 
 # Cofigure the database to use our data dir.
-RUN sed -i -e"s/data_directory =.*$/data_directory = '\/data'/" /etc/postgresql/9.3/main/postgresql.conf
+RUN sed -i -e"s/data_directory =.*$/data_directory = '\/data'/" /etc/postgresql/9.2/main/postgresql.conf
 # Allow connections from anywhere.
-RUN sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /etc/postgresql/9.3/main/postgresql.conf
-RUN echo "host    all    all    0.0.0.0/0    md5" >> /etc/postgresql/9.3/main/pg_hba.conf
+RUN sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /etc/postgresql/9.2/main/postgresql.conf
+RUN echo "host    all    all    0.0.0.0/0    md5" >> /etc/postgresql/9.2/main/pg_hba.conf
 
 EXPOSE 5432
 ADD scripts /scripts
